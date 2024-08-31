@@ -6,6 +6,17 @@ import Table from "../../ui/Table";
 
 import { formatCurrency } from "../../utils/helpers";
 import { formatDistanceFromNow } from "../../utils/helpers";
+import { Booking } from "./BookingDetail";
+import Menus from "../../ui/Menus";
+import { Navigate, useNavigate } from "react-router";
+import { HiArrowDownOnSquare, HiEye } from "react-icons/hi2";
+
+interface Prop {
+  booking: Booking;
+}
+
+// Define a type for status
+type BookingStatus = "unconfirmed" | "checked-in" | "checked-out";
 
 const Cabin = styled.div`
   font-size: 1.6rem;
@@ -47,12 +58,17 @@ function BookingRow({
     guests: { fullName: guestName, email },
     cabins: { name: cabinName },
   },
-}) {
-  const statusToTagName = {
+}: Prop) {
+  const navigate = useNavigate();
+
+  const statusToTagName: Record<BookingStatus, string> = {
     unconfirmed: "blue",
     "checked-in": "green",
     "checked-out": "silver",
   };
+
+  // Cast status to BookingStatus to ensure TypeScript recognizes it
+  const tagType = statusToTagName[status as BookingStatus];
 
   return (
     <Table.Row>
@@ -76,9 +92,30 @@ function BookingRow({
         </span>
       </Stacked>
 
-      <Tag type={statusToTagName[status]}>{status.replace("-", " ")}</Tag>
+      <Tag type={tagType}>{status.replace("-", " ")}</Tag>
 
       <Amount>{formatCurrency(totalPrice)}</Amount>
+
+      <Menus.Menu>
+        <Menus.Toggle id={bookingId} />
+        <Menus.List id={bookingId}>
+          <Menus.Button
+            icon={<HiEye />}
+            onClick={() => navigate(`/bookings/${bookingId}`)}
+          >
+            see details
+          </Menus.Button>
+
+          {status === "unconfirmed" && (
+            <Menus.Button
+              icon={<HiArrowDownOnSquare />}
+              onClick={() => navigate(`/checkin/${bookingId}`)}
+            >
+              Check in
+            </Menus.Button>
+          )}
+        </Menus.List>
+      </Menus.Menu>
     </Table.Row>
   );
 }

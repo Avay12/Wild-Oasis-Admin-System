@@ -64,8 +64,8 @@ export default function CreateCabinForm({
   const { errors } = formState;
 
   function onSubmit(data: FormData) {
-    console.log(data);
     const image = typeof data.image === "string" ? data.image : data.image[0];
+    console.log(image);
     if (isEditSession)
       return updateCabin(
         { newCabin: { ...data, image }, id: editId },
@@ -136,9 +136,8 @@ export default function CreateCabinForm({
           disabled={isWorking}
           defaultValue={0}
           {...register("discount", {
-            required: "This field is required",
             validate: (value) =>
-              value <= getValues().regularPrice ||
+              value >= getValues().regularPrice ||
               "Discount should be less than regular price",
           })}
         />

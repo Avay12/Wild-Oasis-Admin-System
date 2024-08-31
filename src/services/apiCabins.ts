@@ -28,9 +28,12 @@ export async function createUpdateCabin({ newCabin, id }: Data) {
   const hasImagePath = newCabin.image?.startsWith?.(supabaseUrl);
 
   const imageName = `${Math.random()}-${newCabin.image.name}`.replace("/", "");
+  console.log(imageName);
   const imagePath = hasImagePath
     ? newCabin.image
     : `${supabaseUrl}/storage/v1/object/public/cabin-images/${imageName}`;
+
+  console.log(imagePath);
 
   //1. Create/edit cabin
   let query = supabase.from("cabins");
@@ -44,7 +47,6 @@ export async function createUpdateCabin({ newCabin, id }: Data) {
     query = <any>query.update({ ...newCabin, image: imagePath }).eq("id", id);
 
   const { data, error } = await query.select().single();
-  console.log(data);
   if (error) {
     console.error(error);
     throw new Error("Cabins could not be loaded");

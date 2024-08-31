@@ -7,10 +7,38 @@ import {
   HiOutlineHomeModern,
 } from "react-icons/hi2";
 
-import DataItem from "../../ui/DataItem";
-import { Flag } from "../../ui/Flag";
+interface Guest {
+  fullName: string;
+  email: string;
+  country: string;
+  countryFlag: string;
+  nationalID: string;
+}
+
+export interface BookingProp {
+  booking: {
+    created_at: string;
+    startDate: string;
+    endDate: string;
+    numNights: number;
+    numGuests: number;
+    cabinPrice: number;
+    extrasPrice: number;
+    totalPrice: number;
+    hasBreakfast: boolean;
+    observations: string;
+    isPaid: boolean;
+    guests: Guest;
+    cabins: { name: string };
+  };
+}
+interface prop {
+  isPaid: boolean;
+}
 
 import { formatDistanceFromNow, formatCurrency } from "../../utils/helpers";
+import DataItem from "../../ui/DataItem";
+import { Flag } from "../../ui/Flag";
 
 const StyledBookingDataBox = styled.section`
   /* Box */
@@ -68,7 +96,7 @@ const Guest = styled.div`
   }
 `;
 
-const Price = styled.div`
+const Price = styled.div<prop>`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -102,7 +130,7 @@ const Footer = styled.footer`
 `;
 
 // A purely presentational component
-function BookingDataBox({ booking }) {
+function BookingDataBox({ booking }: BookingProp) {
   const {
     created_at,
     startDate,

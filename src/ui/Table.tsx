@@ -1,6 +1,7 @@
 import { createContext, ReactNode, useContext } from "react";
 import styled from "styled-components";
 import { Cabin } from "../features/cabins/CabinRow";
+import { Booking } from "../features/bookings/BookingDetail";
 
 type Prop = {
   columns: string;
@@ -24,8 +25,8 @@ interface RowProp {
 }
 
 interface BodyProp {
-  data: Array<Cabin>;
-  render: (item: Cabin) => ReactNode;
+  data: Array<Cabin | Booking | any>;
+  render: (item: Cabin | Booking | any) => ReactNode;
 }
 
 const StyledTable = styled.div`
@@ -108,13 +109,13 @@ function Header({ children }: HeaderProp) {
 function Row({ children }: RowProp) {
   const { columns } = useContext(TableContext);
   return (
-    <StyledHeader role="row" columns={columns} as="header">
+    <StyledRow role="row" columns={columns} as="header">
       {children}
-    </StyledHeader>
+    </StyledRow>
   );
 }
 function Body({ data, render }: BodyProp) {
-  if (!data.length) return <Empty>No data to show at the moment</Empty>;
+  if (!data) return <Empty>No data to show at the moment</Empty>;
   return <StyledBody>{data.map(render)}</StyledBody>;
 }
 
