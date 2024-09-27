@@ -42,6 +42,7 @@ interface ListProps {
 interface ButtonProps {
   children: ReactNode;
   icon: ReactElement;
+  disabled?: boolean;
   onClick?: () => void;
 }
 
@@ -56,7 +57,7 @@ const Menu = styled.div`
   justify-content: flex-end;
 `;
 
-const StyledToggle = styled.button`
+const StyledToggle = styled.button<{ disabled?: boolean }>`
   background: none;
   border: none;
   padding: 0.4rem;

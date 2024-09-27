@@ -4,7 +4,7 @@ import styled from "styled-components";
 interface props {
   label?: string;
   error?: string | undefined;
-  children: React.ReactElement<any>;
+  children: React.ReactNode;
 }
 
 const StyledFormRow = styled.div`
@@ -46,7 +46,9 @@ const Error = styled.span`
 export default function FormRow({ label, error, children }: props) {
   return (
     <StyledFormRow>
-      {label && <Label htmlFor={children.props.id}>{label}</Label>}
+      {label && (
+        <Label htmlFor={children && (children as any).props?.id}>{label}</Label>
+      )}
       {children}
       {error && <Error>{error}</Error>}
     </StyledFormRow>
