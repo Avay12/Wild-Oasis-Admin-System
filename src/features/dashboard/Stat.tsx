@@ -1,4 +1,12 @@
+import { ReactNode } from "react";
 import styled from "styled-components";
+
+interface stat {
+  icon: ReactNode;
+  title: string;
+  value: number | string;
+  color: string;
+}
 
 const StyledStat = styled.div`
   /* Box */
@@ -47,7 +55,7 @@ const Value = styled.p`
   font-weight: 500;
 `;
 
-function Stat({ icon, title, value, color }) {
+function Stat({ icon, title, value, color }: stat) {
   return (
     <StyledStat>
       <Icon color={color}>{icon}</Icon>
