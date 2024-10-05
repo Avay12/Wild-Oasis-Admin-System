@@ -2,6 +2,10 @@ import styled from "styled-components";
 
 import Heading from "../../ui/Heading";
 import Row from "../../ui/row";
+import { useTodayActivity } from "./useTodayActivity";
+import Spinner from "../../ui/Spinner";
+import TodayItem from "./TodayItem";
+import { Guest } from "../bookings/BookingDetail";
 
 const StyledToday = styled.div`
   /* Box */
@@ -36,14 +40,46 @@ const NoActivity = styled.p`
   margin-top: 0.8rem;
 `;
 
-function Today() {
+export interface Activity {
+  id: string;
+  status: string;
+  created_at: string;
+  startDate: string;
+  endDate: string;
+  numNights: number;
+  numGuests: number;
+  cabinPrice: number;
+  extrasPrice: number;
+  totalPrice: number;
+  hasBreakfast: boolean;
+  observations: string;
+  isPaid: boolean;
+  guests: Guest;
+  cabins: { name: string };
+}
+
+function TodayActivity() {
+  const { activities, isLoading } = useTodayActivity();
   return (
     <StyledToday>
       <Row type="horizontal">
         <Heading as="h2">Today</Heading>
       </Row>
+      {!isLoading ? (
+        activities!.length > 0 ? (
+          <TodayList>
+            {activities?.map((activity) => (
+              <TodayItem activity={activity as Activity} key={activity.id} />
+            ))}
+          </TodayList>
+        ) : (
+          <NoActivity>No activity today...</NoActivity>
+        )
+      ) : (
+        <Spinner />
+      )}
     </StyledToday>
   );
 }
 
-export default Today;
+export default TodayActivity;

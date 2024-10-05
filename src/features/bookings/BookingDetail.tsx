@@ -17,7 +17,7 @@ import Modal from "../../ui/Modal";
 import ConfirmDelete from "../../ui/ConfirmDelete";
 import { useDeleteBooking } from "./useDeleteBooking";
 
-interface Guest {
+export interface Guest {
   fullName: string;
   email: string;
   country: string;

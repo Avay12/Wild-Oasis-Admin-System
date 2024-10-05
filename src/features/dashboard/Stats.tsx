@@ -15,7 +15,7 @@ interface Prop {
   cabinCount: number;
 }
 
-interface BookingFieldStat {
+export interface BookingFieldStat {
   created_at: string;
   totalPrice: number;
   extrasPrice: number;

@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 interface ButtonProps {
   size?: "small" | "medium" | "large";
   variation?: "primary" | "secondary" | "danger";
+  onClick?: Function;
 }
 
 const sizes = {
