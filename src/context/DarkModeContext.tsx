@@ -12,7 +12,10 @@ const DarkModeContext = createContext<ModelContextType>({
 });
 
 function DarkModeProvider({ children }: { children: ReactNode }) {
-  const [isDarkMode, setIsDarkMode] = useLocalStorageState(false, "isDarkMode");
+  const [isDarkMode, setIsDarkMode] = useLocalStorageState(
+    window.matchMedia("(prefers-color-schema):dark").matches,
+    "isDarkMode"
+  );
 
   useEffect(function () {
     if (isDarkMode) {

@@ -10,7 +10,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { useDarkMode } from "../../context/DarkModeToggle";
+import { useDarkMode } from "../../context/DarkModeContext";
 import { BookingFieldStat } from "./Stats";
 import { eachDayOfInterval, format, isSameDay, subDays } from "date-fns";
 
