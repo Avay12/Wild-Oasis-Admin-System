@@ -73,8 +73,6 @@ export async function getBookingsAfterDate(date: string) {
     .gte("created_at", date)
     .lte("created_at", getToday({ end: true }));
 
-  console.log(data);
-
   if (error) {
     console.error(error);
     throw new Error("Bookings could not get loaded");
@@ -91,8 +89,6 @@ export async function getStaysAfterDate(date: string) {
     .select("*, guests!bookings_guestId_fkey(fullName)")
     .gte("startDate", date)
     .lte("startDate", getToday());
-
-  console.log(data);
 
   if (error) {
     console.error(error);

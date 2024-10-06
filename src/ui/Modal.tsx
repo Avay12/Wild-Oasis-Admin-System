@@ -83,7 +83,9 @@ const Button = styled.button`
 const ModalContext = createContext<ModalContextType>({
   openName: "",
   close: () => {},
-  open: (name: string) => {},
+  open: (name: string) => {
+    name;
+  },
 });
 
 //2) create a Parent Component

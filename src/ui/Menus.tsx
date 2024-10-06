@@ -51,12 +51,6 @@ interface ListProps {
   children: ReactNode;
 }
 
-const Menu = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-`;
-
 const StyledToggle = styled.button<{ disabled?: boolean }>`
   background: none;
   border: none;
@@ -115,7 +109,9 @@ const StyledButton = styled.button`
 const MenusContext = createContext<MenuContext>({
   openId: null,
   close: () => {},
-  open: (id: string) => {},
+  open: (id: string) => {
+    id;
+  },
   position: null,
   setPosition: () => {},
 });

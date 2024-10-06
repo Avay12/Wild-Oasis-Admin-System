@@ -109,7 +109,11 @@ function CabinRow({ cabin }: props) {
             <Menus.Toggle id={String(cabinId)} />
 
             <Menus.List id={String(cabinId)}>
-              <Menus.Button icon={<HiSquare2Stack />} onClick={handleDuplicate}>
+              <Menus.Button
+                icon={<HiSquare2Stack />}
+                onClick={handleDuplicate}
+                disabled={isCreating}
+              >
                 Duplicate
               </Menus.Button>
 

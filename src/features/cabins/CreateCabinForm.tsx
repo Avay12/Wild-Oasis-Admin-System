@@ -65,7 +65,6 @@ export default function CreateCabinForm({
 
   function onSubmit(data: FormData) {
     const image = typeof data.image === "string" ? data.image : data.image[0];
-    console.log(image);
     if (isEditSession)
       return updateCabin(
         { newCabin: { ...data, image }, id: editId },
@@ -88,7 +87,7 @@ export default function CreateCabinForm({
   }
 
   function onError(error: Object) {
-    // console.log(error);
+    return error;
   }
 
   return (

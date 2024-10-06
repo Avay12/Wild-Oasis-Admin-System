@@ -1,17 +1,7 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getBookings } from "../../services/apiBookings";
 import { useSearchParams } from "react-router-dom";
-import { Booking } from "./BookingDetail";
 import { PAGE_SIZE } from "../../utils/constraints";
-
-interface Query {
-  isLoading: boolean;
-  data: {
-    data: Booking;
-    count: number;
-  };
-  error: string;
-}
 
 export function useBookings() {
   const queryClient = useQueryClient();
