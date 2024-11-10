@@ -11,7 +11,7 @@ export function useSignup() {
       );
     },
     onError: (error: any) => {
-      toast.error("Signup failed. Please try again.");
+      toast.error("Signup failed. Please try again.", error);
     },
   });
   const isLoading = status === "pending" ? true : false;
