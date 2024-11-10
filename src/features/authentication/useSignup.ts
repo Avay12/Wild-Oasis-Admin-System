@@ -10,6 +10,9 @@ export function useSignup() {
         "Account successfully created! Please verify the new account from the user's email address."
       );
     },
+    onError: (error: any) => {
+      toast.error("Signup failed. Please try again.");
+    },
   });
   const isLoading = status === "pending" ? true : false;
 
